@@ -26,8 +26,11 @@
 }
 
 .header-section .navbar .activeMenu {
-    box-shadow: rgba(255, 255, 255, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-    background-color: var(--primary-white);
+    opacity: 1;
+    color: var(--primary-aqua);
+}
+
+.header-section .navbar .nav-menu:hover {
     opacity: 0.9;
 }
 
@@ -41,13 +44,10 @@
 
 
 @media screen and (max-width:767px) {
-    .header-section .navbar .offcanvas.show {
-        background-color: var(--primary-gray);
-        width: 250px;
-    }
 
+    .header-section .navbar .offcanvas.show,
     .header-section .navbar .offcanvas.offcanvas-end {
-        background-color: var(--primary-gray);
+        background-color: var(--primary-white);
         width: 250px;
     }
 }

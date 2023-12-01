@@ -32,6 +32,7 @@ export class AddStudentsComponent {
     return control.value !== null && control.value.trim() == '' ? { checkNameValue: true } : null;
   };
 
+
   // date validation 
   setDOBValidation = (control: AbstractControl) => {
     let selectedDate = new Date(control.value);
@@ -108,7 +109,7 @@ export class AddStudentsComponent {
   // subject Form Array 
   addControl = (item: number) => {
     this.subjectMarksData.push(new FormGroup({
-      sName: new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z0-9]+$'), this.trimValidation]),
+      sName: new FormControl('', [Validators.required, Validators.pattern('^.*[a-zA-Z]+.*$')]),
       sMarks: new FormControl('', [Validators.required, this.setMarksLimit]),
     }));
   };

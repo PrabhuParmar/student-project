@@ -9,8 +9,9 @@ body {
     --primary-blue: #0d172a;
     --primary-black: #000000ad;
     --primary-white: white;
-    --primary-gray: #dddddd;
+    --primary-gray: #dddddd57;
     --light-gray: #a99f9f61;
     --primary-red: red;
     --primary-aqua: #085e6a;
+    --light-red: #fd5e5e
 }

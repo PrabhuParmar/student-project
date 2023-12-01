@@ -15,12 +15,12 @@
                             <span *ngIf="studentFormDetails.get('name')?.errors 
                             && studentFormDetails.get('name')?.hasError('required') 
                             || studentFormDetails.get('name')?.hasError('checkNameValue')" class="form-error">
-                                name is required!
+                                Name is required!
                             </span>
                             <span
                                 *ngIf="studentFormDetails.get('name')?.errors && studentFormDetails.get('name')?.hasError('pattern')"
                                 class="form-error">
-                                Please enter valid name, Only Characters allowed!
+                                Please enter valid name, only characters allowed!
                             </span>
                         </div>
                     </div>
@@ -31,12 +31,12 @@
                             *ngIf="!studentFormDetails.get('email')?.valid && studentFormDetails.get('email')?.touched">
                             <span *ngIf="studentFormDetails.get('email')?.errors 
                             && studentFormDetails.get('email')?.hasError('required') " class="form-error">
-                                email is required!
+                                Email is required!
                             </span>
                             <span
                                 *ngIf="studentFormDetails.get('email')?.errors && studentFormDetails.get('email')?.hasError('pattern')"
                                 class="form-error">
-                                Please enter a valid email address
+                                Please enter a valid email address!
                             </span>
                         </div>
                     </div>
@@ -47,18 +47,18 @@
                             *ngIf="!studentFormDetails.get('phoneNumber')?.valid && studentFormDetails.get('phoneNumber')?.touched">
                             <span *ngIf="studentFormDetails.get('phoneNumber')?.errors 
                             && studentFormDetails.get('phoneNumber')?.hasError('required')" class="form-error">
-                                Phone Number is required!
+                                Phone number is required!
                             </span>
                             <span
                                 *ngIf="studentFormDetails.get('phoneNumber')?.errors && studentFormDetails.get('phoneNumber')?.hasError('pattern')"
                                 class="form-error">
-                                Please enter valid Phone Number, Phone Number must be 10 digit.
+                                Please enter a valid phone number, phone number must be 10 digits.
                             </span>
                         </div>
                     </div>
                     <div class="mb-2 form-item-section  col-lg-6">
                         <label class="form-label">DOB <span class="form-error">*</span> </label>
-                        <input type="date" class="form-control" formControlName="dob">
+                        <input type="date" class="form-control input-date" formControlName="dob">
                         <div class="form-text d-flex flex-column"
                             *ngIf="!studentFormDetails.get('dob')?.valid && studentFormDetails.get('dob')?.touched">
                             <span *ngIf="studentFormDetails.get('dob')?.errors 
@@ -68,7 +68,7 @@
                             <span
                                 *ngIf="studentFormDetails.get('dob')?.errors && studentFormDetails.get('dob')?.hasError('setSelectedDate')"
                                 class="form-error">
-                                Please enter a valid date, You cannot enter a date in the future!
+                                Please enter a valid date, you cannot enter a future date!
                             </span>
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                                             <span *ngIf="subject.get('sName')?.errors 
                             && subject.get('sName')?.hasError('required') 
                             || subject.get('sName')?.hasError('checkNameValue')" class="form-error">
-                                                subject Name is required!
+                                                Subject name is required!
                                             </span>
                                             <span
                                                 *ngIf="subject.get('sName')?.errors && subject.get('sName')?.hasError('pattern')"
@@ -126,7 +126,7 @@
                                                 <input type="number" class="form-control" formControlName="sMarks">
                                             </div>
                                             <div class="d-flex align-items-end justify-content-end col-2">
-                                                <button class=" btn btn-danger" type="button"
+                                                <button class=" btn btn-danger subject-remove-btn" type="button"
                                                     [placement]="['right','top']" ngbTooltip="Delete"
                                                     (click)="removeSubject(item)"
                                                     [disabled]="subjectMark.controls.length==1"> X
@@ -138,19 +138,13 @@
                                             ngClass="form-error">
                                             <span *ngIf="subject.get('sMarks')?.errors 
                             && subject.get('sMarks')?.hasError('required') " class="form-error">
-                                                subject Mark is required!
+                                                Subject marks is required!
                                             </span>
                                             <span
                                                 *ngIf="subject.get('sMarks')?.errors && subject.get('sMarks')?.hasError('onMarksLimit') "
                                                 class="form-error">
-                                                Please enter valid Mark, mark must be 0 to 100
+                                                Please enter valid marks, marks must be between 0 to 100
                                             </span>
-                                            <span
-                                                *ngIf="studentFormDetails.get('phoneNumber')?.errors && studentFormDetails.get('phoneNumber')?.hasError('pattern')"
-                                                class="form-error">
-                                                Please enter valid mobile Number,Only Number Allowed!
-                                            </span>
-
                                         </div>
                                     </div>
                                 </div>
@@ -180,18 +174,18 @@
                         </div>
                     </div>
 
-                    <div class="mb-2 form-item-section form-check col-12">
+                    <div class="mb-2 form-item-section  col-12">
                         <input type="checkbox" class="form-check-input " id="exampleCheck1"
                             formControlName="termsStatus" required>
-                        <label class="form-check-label form-label" for="exampleCheck1"> Agree terms &
+                        <label class="form-check-label ms-2 form-label" for="exampleCheck1"> Agree terms &
                             conditions.</label>
                     </div>
-
                     <div class="d-flex form-item-section justify-content-center mb-2">
                         <div class="d-flex justify-content-center">
-                            <button type="button" class="btn submit-button" (click)="onSubmitstudentFormDetails()"
-                                [disabled]="!studentFormDetails.valid">
+                            <button type="button" class="btn submit-button set-disable-btn"
+                                (click)="onSubmitstudentFormDetails()" [disabled]="!studentFormDetails.valid">
                                 {{setFormMode ? 'Update' : 'Submit'}} </button>
+
                         </div>
                         <div class="d-flex justify-content-center ms-3">
                             <button type="button" class="btn cancel-button"

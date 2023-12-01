@@ -62,7 +62,7 @@
 
 .student-section .student-form-section .submit-button {
     background-color: var(--primary-aqua);
-    border: 2px solid var(--primary-white);
+    border: 2px solid var(--primary-aqua);
     color: var(--primary-white);
     cursor: pointer;
     font-weight: 600;
@@ -72,7 +72,19 @@
 .student-section .student-form-section .submit-button:hover {
     background-color: var(--primary-white);
     color: var(--primary-aqua);
-    border-color: var(--primary-aqua);
+}
+
+/* set Disable btn css  */
+.student-section .student-form-section .submit-button:disabled {
+    cursor: not-allowed;
+    pointer-events: all !important;
+    background-color: var(--primary-aqua);
+    color: var(--primary-white);
+}
+
+.subject-remove-btn:disabled {
+    cursor: not-allowed;
+    pointer-events: all !important;
 }
 
 .student-section .student-form-section .cancel-button {
@@ -86,9 +98,24 @@
 
 .student-section .student-form-section .cancel-button:hover {
     background-color: var(--primary-aqua);
-    border: 2px solid var(--primary-white);
-    border-color: var(--primary-white);
     color: var(--primary-white);
+}
+
+.student-section .input-date[type="date"] {
+    position: relative;
+}
+
+.student-section .input-date[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: auto;
+    color: transparent;
+    background: transparent;
+    cursor: text;
 }
 
 @media screen and (max-width:360px) {

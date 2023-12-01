@@ -2,8 +2,9 @@
 <div class="student-list-section ">
     <div class="student-table-section">
         <div class="d-flex flex-wrap justify-content-between ">
-            <div class="col-12 col-sm-8 col-md-5 col-lg-3 my-2 d-flex position-relative search-section">
-                <input type="search" class="form-control" (keyup)="setSearchData($event)" placeholder="Search....">
+            <div class="col-12 col-sm-10 col-md-7 col-lg-5 my-2 d-flex position-relative search-section">
+                <input type="search" class="form-control" (keyup)="setSearchData($event)"
+                    placeholder="Search enrollmentId, Name, email, Phone Number">
                 <img src="../../assets/Image/icons8-search-50.png" alt="" class="search-image">
             </div>
             <div class="my-2">
@@ -51,17 +52,40 @@
                             </span>
                         </th>
                         <th scope="col" class="col-dob col-data student-details-lable col-table-title">
-                            <span class="d-flex align-items-center">
-                                DOB
-                                <img src="{{dateSortingIcon}}" alt="" class="sorting-icon" (click)="sortingDate()">
-                            </span>
+                            <div class="d-flex justify-content-center">
+                                <span>
+                                    DOB
+                                    <img src="{{dateSortingIcon}}" alt="" class="sorting-icon" (click)="sortingDate()">
+                                </span>
+                            </div>
                         </th>
-                        <th scope="col" class="col-gender col-data student-details-lable col-table-title">Gender</th>
+                        <th scope="col" class="col-gender col-data student-details-lable col-table-title">
+                            <div class="d-flex justify-content-center">
+                                <span>
+                                    Gender
+                                </span>
+                            </div>
+                        </th>
                         <th scope="col" class="col-semester col-table-data student-details-lable col-table-title">
-                            Semester</th>
-                        <th scope="col" class="col-grade col-table-data student-details-lable col-table-title">Grade
+                            <div class="d-flex justify-content-center">
+                                <span>
+                                    Semester
+                                </span>
+                            </div>
                         </th>
-                        <th scope="col" class="col-action col-table-data student-details-lable col-table-title">Action
+                        <th scope="col" class="col-grade col-table-data student-details-lable col-table-title">
+                            <div class="d-flex justify-content-center">
+                                <span>
+                                    Grade
+                                </span>
+                            </div>
+                        </th>
+                        <th scope="col" class="col-action col-table-data student-details-lable col-table-title">
+                            <div class="d-flex justify-content-center">
+                                <span>
+                                    Action
+                                </span>
+                            </div>
                         </th>
                     </tr>
                 </thead>
@@ -71,19 +95,42 @@
                         <td class="col-data"> {{student.name}} </td>
                         <td class="col-email"> {{student.email}} </td>
                         <td class="col-data"> {{student.phoneNumber}} </td>
-                        <td class="col-data"> {{student.dob}} </td>
-                        <td class="col-data"> {{student.gender}} </td>
-                        <td class="col-table-data"> {{student.semester}} </td>
-                        <td class="col-table-data"> {{student.grade}} </td>
+                        <td class="col-data">
+                            <div class="d-flex justify-content-center">
+                                <span>
+                                    {{student.dob}}
+                                </span>
+                            </div>
+                        </td>
+                        <td class="col-data">
+                            <div class="d-flex justify-content-center">
+                                <span>
+                                    {{student.gender}}
+                                </span>
+                            </div>
+                        </td>
+                        <td class="col-table-data">
+                            <div class="d-flex justify-content-center">
+                                <span>
+                                    {{student.semester}}
+                                </span>
+                            </div>
+                        </td>
+                        <td class="col-table-data">
+                            <div class="d-flex justify-content-center">
+                                <span>
+                                    {{student.grade}}
+                                </span>
+                            </div>
+                        </td>
                         <td class="col-action ">
-                            <div class="d-flex justify-content-between me-3">
+                            <div class="d-flex justify-content-center mx-2">
                                 <img src="../../assets/Image/icons8-edit-48.png" class="edit-image table-data-img"
                                     placement="top" ngbTooltip="Edit" (click)="editStudentDetails(itemIndex)">
-                                <div data-bs-toggle="modal" data-bs-target="#setDeleteItem">
+                                <div class="ms-3" data-bs-toggle="modal" data-bs-target="#setDeleteItem">
                                     <img src="../../assets/Image/icons8-delete-64.png"
                                         class="delete-image table-data-img" placement="top" ngbTooltip="Delete"
                                         (click)="setSelectedStudentDetailsIndex(itemIndex)">
-
                                 </div>
                             </div>
                         </td>
@@ -95,14 +142,14 @@
     <!-- empty message show  -->
     <div *ngIf="studentDataList.length == 0 "
         class="d-flex justify-content-center align-items-center empty-message-section">
-        <h1 class="empty-message">No Record Found!</h1>
+        <h5 class="empty-message">No Record Found!</h5>
     </div>
 </div>
 
 <!-- delete confirmation popup  -->
 <!-- Modal -->
 <div class="modal fade" id="setDeleteItem" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">
@@ -111,12 +158,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Are you sure you want to delete Student Details
+                Are you sure you want to delete Student Details?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                <button type="button" class="btn btn-primary" (click)="deleteStudentDetails()"
-                    data-bs-dismiss="modal">Yes</button>
+                <button type="button" class="btn btn-secondary cancel-btn" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary delete-btn" (click)="deleteStudentDetails()"
+                    data-bs-dismiss="modal">Confirm</button>
             </div>
         </div>
     </div>
