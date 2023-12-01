@@ -1,0 +1,94 @@
+/* student list css start  */
+.student-list-section {
+    background-color: var(--primary-gray);
+    padding: 20px;
+    min-height: calc(100vh - 64px);
+}
+
+.student-list-section .student-table-section .col-table-title {
+    color: var(--primary-blue);
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+}
+
+.student-list-section .student-table-section .table {
+    box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+}
+
+
+.student-list-section .student-table-section .col-data {
+    min-width: 144px;
+    word-break: break-all;
+}
+
+.student-list-section .student-table-section .col-email {
+    min-width: 200px;
+    word-break: break-all;
+
+}
+
+.student-list-section .student-table-section .sorting-icon {
+    height: 17px;
+    width: 17px;
+    cursor: pointer;
+    opacity: 0.6;
+    margin-left: 6px;
+}
+
+.student-list-section .student-table-section .sorting-icon:hover {
+    opacity: 0.9;
+}
+
+.student-list-section .empty-message-section {
+    height: calc(100vh - 242px);
+}
+
+.student-list-section .empty-message {
+    opacity: 0.6;
+}
+
+.student-list-section .student-table-section .table-data-img {
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+}
+
+.student-list-section .student-table-section .col-action {
+    min-width: 96px;
+}
+
+.student-list-section .student-table-section .search-section .form-control {
+    border: none;
+    padding-left: 41px;
+}
+
+.student-list-section .student-table-section .grade-select {
+    border: none;
+    cursor: pointer;
+}
+
+.student-list-section .student-table-section .search-section .form-control:focus,
+.grade-select:focus {
+    box-shadow: none;
+    border: none;
+}
+
+.student-list-section .student-table-section .search-section .search-image {
+    position: absolute;
+    left: 7px;
+    height: 24px;
+    width: 24px;
+    top: 7px;
+}
+
+@media screen and (max-width:570px) {
+    .student-list-section {
+        padding: 5px;
+    }
+
+    .student-list-section .empty-message-section {
+        height: calc(100vh - 250px);
+    }
+}
+
+/* student list End  */

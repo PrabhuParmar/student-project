@@ -1,0 +1,72 @@
+/* header css start  */
+.header-section .navbar {
+    height: 64px !important;
+    background-color: var(--primary-gray);
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+
+}
+
+.header-section .navbar .badge {
+    cursor: pointer;
+}
+
+.header-section .navbar .navbar-title {
+    font-size: 27px;
+    font-weight: 600;
+    color: var(--primary-black);
+}
+
+.header-section .navbar .nav-menu {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--primary-black);
+    border-radius: 20px;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+}
+
+.header-section .navbar .activeMenu {
+    box-shadow: rgba(255, 255, 255, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    background-color: var(--primary-white);
+    opacity: 0.9;
+}
+
+.header-section .navbar .navbar-toggler {
+    background-color: var(--primary-white) !important;
+}
+
+.header-section .navbar .navbar-toggler:focus {
+    box-shadow: none !important
+}
+
+
+@media screen and (max-width:767px) {
+    .header-section .navbar .offcanvas.show {
+        background-color: var(--primary-gray);
+        width: 250px;
+    }
+
+    .header-section .navbar .offcanvas.offcanvas-end {
+        background-color: var(--primary-gray);
+        width: 250px;
+    }
+}
+
+
+@media screen and (max-width:360px) {
+    .header-section .navbar .navbar-title {
+        font-size: 20px;
+    }
+
+    .header-section .navbar .navbar-toggler-icon {
+        height: 22px;
+        width: 23px;
+    }
+
+    .header-section .navbar .navbar-toggler {
+        padding: 6px 10px;
+
+    }
+}
+
+/* header css End  */

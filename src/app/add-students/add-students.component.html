@@ -1,0 +1,208 @@
+<!-- student details Form start  -->
+<div class="student-section">
+    <div class="container">
+        <div class="row d-flex justify-content-center form-container">
+            <div class=" col col-12 col-sm-12 col-md-10 col-lg-11  student-form-section ">
+                <div class="d-flex justify-content-center form-title mb-4">
+                    <h1 class="form-title-data"> {{setFormMode ? 'Update Student' : 'Add Student'}}</h1>
+                </div>
+                <form [formGroup]="studentFormDetails" class="student-form row g-3">
+                    <div class="mb-2 form-item-section col-lg-6">
+                        <label class="form-label">Name <span class="form-error">*</span> </label>
+                        <input type="text" class="form-control" formControlName="name">
+                        <div class="form-text"
+                            *ngIf="!studentFormDetails.get('name')?.valid && studentFormDetails.get('name')?.touched">
+                            <span *ngIf="studentFormDetails.get('name')?.errors 
+                            && studentFormDetails.get('name')?.hasError('required') 
+                            || studentFormDetails.get('name')?.hasError('checkNameValue')" class="form-error">
+                                name is required!
+                            </span>
+                            <span
+                                *ngIf="studentFormDetails.get('name')?.errors && studentFormDetails.get('name')?.hasError('pattern')"
+                                class="form-error">
+                                Please enter valid name, Only Characters allowed!
+                            </span>
+                        </div>
+                    </div>
+                    <div class="mb-2 form-item-section col-lg-6">
+                        <label class="form-label">Email <span class="form-error">*</span> </label>
+                        <input type="email" class="form-control" formControlName="email">
+                        <div class="form-text"
+                            *ngIf="!studentFormDetails.get('email')?.valid && studentFormDetails.get('email')?.touched">
+                            <span *ngIf="studentFormDetails.get('email')?.errors 
+                            && studentFormDetails.get('email')?.hasError('required') " class="form-error">
+                                email is required!
+                            </span>
+                            <span
+                                *ngIf="studentFormDetails.get('email')?.errors && studentFormDetails.get('email')?.hasError('pattern')"
+                                class="form-error">
+                                Please enter a valid email address
+                            </span>
+                        </div>
+                    </div>
+                    <div class="mb-2 form-item-section  col-lg-6">
+                        <label class="form-label">Phone Number <span class="form-error">*</span> </label>
+                        <input type="number" class="form-control" formControlName="phoneNumber">
+                        <div class="form-text d-flex flex-column"
+                            *ngIf="!studentFormDetails.get('phoneNumber')?.valid && studentFormDetails.get('phoneNumber')?.touched">
+                            <span *ngIf="studentFormDetails.get('phoneNumber')?.errors 
+                            && studentFormDetails.get('phoneNumber')?.hasError('required')" class="form-error">
+                                Phone Number is required!
+                            </span>
+                            <span
+                                *ngIf="studentFormDetails.get('phoneNumber')?.errors && studentFormDetails.get('phoneNumber')?.hasError('pattern')"
+                                class="form-error">
+                                Please enter valid Phone Number, Phone Number must be 10 digit.
+                            </span>
+                        </div>
+                    </div>
+                    <div class="mb-2 form-item-section  col-lg-6">
+                        <label class="form-label">DOB <span class="form-error">*</span> </label>
+                        <input type="date" class="form-control" formControlName="dob">
+                        <div class="form-text d-flex flex-column"
+                            *ngIf="!studentFormDetails.get('dob')?.valid && studentFormDetails.get('dob')?.touched">
+                            <span *ngIf="studentFormDetails.get('dob')?.errors 
+                            && studentFormDetails.get('dob')?.hasError('required') " class="form-error">
+                                DOB is required!
+                            </span>
+                            <span
+                                *ngIf="studentFormDetails.get('dob')?.errors && studentFormDetails.get('dob')?.hasError('setSelectedDate')"
+                                class="form-error">
+                                Please enter a valid date, You cannot enter a date in the future!
+                            </span>
+                        </div>
+                    </div>
+                    <div class="mb-2 form-item-section  col-lg-6">
+                        <label class="form-label">Semester <span class="form-error">*</span> </label>
+                        <select class="form-select form-control" formControlName="semester">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                    </div>
+                    <div class="mb-2  form-item-section col-lg-6">
+                        <label class="form-label">No. of subject <span class="form-error">*</span> </label>
+                        <select class="form-select form-control" aria-label="Default select example"
+                            (change)="onSelectedNumberOfSubject($event)" formControlName="noOfSububject">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-2 form-item-section col-12">
+                        <div class="" formArrayName="subject">
+                            <div class="" *ngFor="let subject of subjectMark.controls let item=index"
+                                [formGroupName]="item">
+                                <div class="d-flex row g-3">
+                                    <div class="col-12 col-md-12  col-lg-6">
+                                        <label class="form-label">Subject Name <span class="form-error">*</span>
+                                        </label>
+                                        <input type="text" class="form-control" formControlName="sName">
+                                        <div class="form-text"
+                                            *ngIf="!subject.get('sName')?.valid && subject.get('sName')?.touched"
+                                            ngClass="form-error">
+                                            <span *ngIf="subject.get('sName')?.errors 
+                            && subject.get('sName')?.hasError('required') 
+                            || subject.get('sName')?.hasError('checkNameValue')" class="form-error">
+                                                subject Name is required!
+                                            </span>
+                                            <span
+                                                *ngIf="subject.get('sName')?.errors && subject.get('sName')?.hasError('pattern')"
+                                                class="form-error">
+                                                Please enter valid subject name
+                                            </span>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-12 col-md-12 col-lg-6 ">
+                                        <label class="form-label">Subject Marks <span class="form-error">*</span>
+                                        </label>
+                                        <div class="col-12 d-flex">
+                                            <div class="col-10">
+                                                <input type="number" class="form-control" formControlName="sMarks">
+                                            </div>
+                                            <div class="d-flex align-items-end justify-content-end col-2">
+                                                <button class=" btn btn-danger" type="button"
+                                                    [placement]="['right','top']" ngbTooltip="Delete"
+                                                    (click)="removeSubject(item)"
+                                                    [disabled]="subjectMark.controls.length==1"> X
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="form-text"
+                                            *ngIf="!subject.get('sMarks')?.valid && subject.get('sMarks')?.touched"
+                                            ngClass="form-error">
+                                            <span *ngIf="subject.get('sMarks')?.errors 
+                            && subject.get('sMarks')?.hasError('required') " class="form-error">
+                                                subject Mark is required!
+                                            </span>
+                                            <span
+                                                *ngIf="subject.get('sMarks')?.errors && subject.get('sMarks')?.hasError('onMarksLimit') "
+                                                class="form-error">
+                                                Please enter valid Mark, mark must be 0 to 100
+                                            </span>
+                                            <span
+                                                *ngIf="studentFormDetails.get('phoneNumber')?.errors && studentFormDetails.get('phoneNumber')?.hasError('pattern')"
+                                                class="form-error">
+                                                Please enter valid mobile Number,Only Number Allowed!
+                                            </span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 form-item-section d-flex align-items-end">
+                        <div class="d-flex ">
+                            <label class="form-label">Gender <span class="form-error">*</span> </label>
+                            <div class="gender-content d-flex ms-3">
+                                <div class="form-check">
+                                    <input class="form-check-input " type="radio" name="gender" value="male"
+                                        formControlName="gender">
+                                    <label class="form-check-label form-label" for="flexRadioDefault1">
+                                        Male
+                                    </label>
+                                </div>
+                                <div class="form-check ms-3">
+                                    <input class="form-check-input" type="radio" name="gender" value="female"
+                                        formControlName="gender">
+                                    <label class="form-check-label form-label" for="flexRadioDefault2">
+                                        Female
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-2 form-item-section form-check col-12">
+                        <input type="checkbox" class="form-check-input " id="exampleCheck1"
+                            formControlName="termsStatus" required>
+                        <label class="form-check-label form-label" for="exampleCheck1"> Agree terms &
+                            conditions.</label>
+                    </div>
+
+                    <div class="d-flex form-item-section justify-content-center mb-2">
+                        <div class="d-flex justify-content-center">
+                            <button type="button" class="btn submit-button" (click)="onSubmitstudentFormDetails()"
+                                [disabled]="!studentFormDetails.valid">
+                                {{setFormMode ? 'Update' : 'Submit'}} </button>
+                        </div>
+                        <div class="d-flex justify-content-center ms-3">
+                            <button type="button" class="btn cancel-button"
+                                (click)="onCancelStudentFormDetails()">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- student details Form End  -->

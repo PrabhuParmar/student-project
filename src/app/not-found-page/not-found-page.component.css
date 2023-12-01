@@ -1,0 +1,9 @@
+/* not dound page css start  */
+.not-found-page-section {
+    height: calc(100vh - 64px);
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--primary-black);
+}
+
+/* not dound page css End  */

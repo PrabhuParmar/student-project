@@ -1,0 +1,123 @@
+<!-- student list section start  -->
+<div class="student-list-section ">
+    <div class="student-table-section">
+        <div class="d-flex flex-wrap justify-content-between ">
+            <div class="col-12 col-sm-8 col-md-5 col-lg-3 my-2 d-flex position-relative search-section">
+                <input type="search" class="form-control" (keyup)="setSearchData($event)" placeholder="Search....">
+                <img src="../../assets/Image/icons8-search-50.png" alt="" class="search-image">
+            </div>
+            <div class="my-2">
+                <select class="form-select grade-select" aria-label="Default select example"
+                    (change)="gradeFilterData($event)">
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                    <option value="" selected>All</option>
+                </select>
+            </div>
+        </div>
+        <div class="table-responsive table-container">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col" class="col-id col-data student-details-lable col-table-title">
+                            <span class="d-flex align-items-center">
+                                Enrollment Id
+                                <img src="{{sortingvalue}}" alt="" class="sorting-icon" (click)="sortingId()">
+                            </span>
+                        </th>
+                        <th scope="col" class="col-name col-data student-details-lable col-table-title">
+                            <span class="d-flex align-items-center">
+                                Name
+                                <img src="{{nameSortingStatusIcon}}" alt="" class="sorting-icon"
+                                    (click)="sortingName()">
+                            </span>
+                        </th>
+                        <th scope="col" class="col-email student-details-lable col-table-title">
+                            <span class="d-flex align-items-center">
+                                Email
+                                <img src="{{emailSortingStatusIcon}}" alt="" class="sorting-icon"
+                                    (click)="sortingEmail()">
+                            </span>
+                        </th>
+                        <th scope="col" class="col-number col-data student-details-lable col-table-title">
+                            <span class="d-flex align-items-center">
+                                Phone number
+                                <img src="{{phoneNumberSortingIcon}}" alt="" class="sorting-icon"
+                                    (click)="sortingPhoneNumber()">
+                            </span>
+                        </th>
+                        <th scope="col" class="col-dob col-data student-details-lable col-table-title">
+                            <span class="d-flex align-items-center">
+                                DOB
+                                <img src="{{dateSortingIcon}}" alt="" class="sorting-icon" (click)="sortingDate()">
+                            </span>
+                        </th>
+                        <th scope="col" class="col-gender col-data student-details-lable col-table-title">Gender</th>
+                        <th scope="col" class="col-semester col-table-data student-details-lable col-table-title">
+                            Semester</th>
+                        <th scope="col" class="col-grade col-table-data student-details-lable col-table-title">Grade
+                        </th>
+                        <th scope="col" class="col-action col-table-data student-details-lable col-table-title">Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let student of studentDataList let itemIndex=index">
+                    <tr>
+                        <td class="col-data"> {{student.enrollmentId}} </td>
+                        <td class="col-data"> {{student.name}} </td>
+                        <td class="col-email"> {{student.email}} </td>
+                        <td class="col-data"> {{student.phoneNumber}} </td>
+                        <td class="col-data"> {{student.dob}} </td>
+                        <td class="col-data"> {{student.gender}} </td>
+                        <td class="col-table-data"> {{student.semester}} </td>
+                        <td class="col-table-data"> {{student.grade}} </td>
+                        <td class="col-action ">
+                            <div class="d-flex justify-content-between me-3">
+                                <img src="../../assets/Image/icons8-edit-48.png" class="edit-image table-data-img"
+                                    placement="top" ngbTooltip="Edit" (click)="editStudentDetails(itemIndex)">
+                                <div data-bs-toggle="modal" data-bs-target="#setDeleteItem">
+                                    <img src="../../assets/Image/icons8-delete-64.png"
+                                        class="delete-image table-data-img" placement="top" ngbTooltip="Delete"
+                                        (click)="setSelectedStudentDetailsIndex(itemIndex)">
+
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- empty message show  -->
+    <div *ngIf="studentDataList.length == 0 "
+        class="d-flex justify-content-center align-items-center empty-message-section">
+        <h1 class="empty-message">No Record Found!</h1>
+    </div>
+</div>
+
+<!-- delete confirmation popup  -->
+<!-- Modal -->
+<div class="modal fade" id="setDeleteItem" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    Delete student
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete Student Details
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary" (click)="deleteStudentDetails()"
+                    data-bs-dismiss="modal">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
