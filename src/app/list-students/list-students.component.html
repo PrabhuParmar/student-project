@@ -126,7 +126,8 @@
                         <td class="col-action ">
                             <div class="d-flex justify-content-center mx-2">
                                 <img src="../../assets/Image/icons8-edit-48.png" class="edit-image table-data-img"
-                                    placement="top" ngbTooltip="Edit" (click)="editStudentDetails(itemIndex)">
+                                    placement="top" ngbTooltip="Edit"
+                                    (click)="editStudentDetails(itemIndex,student.enrollmentId)">
                                 <div class="ms-3" data-bs-toggle="modal" data-bs-target="#setDeleteItem">
                                     <img src="../../assets/Image/icons8-delete-64.png"
                                         class="delete-image table-data-img" placement="top" ngbTooltip="Delete"

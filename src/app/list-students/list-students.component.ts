@@ -93,15 +93,14 @@ export class ListStudentsComponent {
   };
 
   // edit student Details
-  editStudentDetails = (index: number) => {
-    this.studentListService.onEditStudentDetails(index);
+  editStudentDetails = (index: number, id: number | any) => {
+    this.studentListService.onEditStudentDetails(index, id);
     this.router.navigate(['/add-student']);
   };
 
   // set search Data in service 
   setSearchData = (searchValue: any) => {
     this.studentListService.searchFilterData(searchValue.target.value);
-    // searchValue.target.value = ''
   };
 
   // set grade data in service 

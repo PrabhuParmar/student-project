@@ -68,24 +68,30 @@ export class StudentListService {
 
   // delete student details 
   onDeleteStudentListItem = (index: number, id: any) => {
-    if (this.editSelectedData !== undefined && this.editSelectedData.enrollmentId === id) {
+    let setDeleteItemIndex = this.studentDetailsList.findIndex(object => {
+      return object.enrollmentId === id;
+    });
+
+
+    if (this.editSelectedData !== undefined && this.editSelectedData.enrollmentId === this.studentDetailsList[setDeleteItemIndex].enrollmentId) {
       this.checkDeleteValueAndEditValue = true;
     };
-    const setFilterValue = this.studentDetailsList.filter(object => {
-      return object.enrollmentId !== id;
-    });
-    this.studentDetailsList = setFilterValue
-    this.studentFilterDetailsList.next(this.studentDetailsList)
+
+    this.studentDetailsList.splice(setDeleteItemIndex, 1);
+    this.studentFilterDetailsList.next(this.studentDetailsList);
     this.totalStudent.next(this.studentDetailsList.length);
     this.filterStudentListData();
   };
 
   // edit student Details 
-  onEditStudentDetails = (index: number) => {
+  onEditStudentDetails = (index: number, id: number) => {
     this.checkDeleteValueAndEditValue = false;
-    this.indexNumber = index;
     this.editMode = true;
-    this.editSelectedData = this.studentDetailsList[index];
+    this.indexNumber = this.studentDetailsList.findIndex(object => {
+      return object.enrollmentId === id;
+    });
+    this.editSelectedData = this.studentDetailsList[this.indexNumber];
+
   };
 
   // update Student Details 
@@ -118,6 +124,7 @@ export class StudentListService {
       name: this.searchData,
       selected: this.gradeData
     };
+
     this.studentFilterDetailsList.next(
       this.studentDetailsList.filter((data: any) => {
         let nameFound = data.name.toString().trim().toLowerCase().search(fields.name.toLowerCase()) !== -1;
