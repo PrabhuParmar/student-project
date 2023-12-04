@@ -7,6 +7,7 @@ import { Subject } from 'rxjs';
 })
 
 export class StudentListService {
+
   // Global Variable
   studentGrade: string = '';
   editMode: boolean = false;
@@ -17,7 +18,7 @@ export class StudentListService {
   studentFilterDetailsList = new Subject<any>();
   searchData: string = "";
   gradeData: string = "";
-  checkDeleteValueAndEditValue!: boolean
+  checkDeleteValueAndEditValue!: boolean;
 
   // submit Data 
   submitStudentData = (studentData: StudentDetailsInterface) => {
@@ -34,6 +35,7 @@ export class StudentListService {
     });
     this.totalStudent.next(this.studentDetailsList.length);
   };
+
 
   // set Student result Grade 
   setStudentResultGrade = (subjectMarksData: StudentDetailsInterface) => {
@@ -65,12 +67,17 @@ export class StudentListService {
   };
 
   // delete student details 
-  onDeleteStudentListItem = (index: number,) => {
-    if (this.editSelectedData !== undefined && this.editSelectedData.enrollmentId === this.studentDetailsList[index].enrollmentId) {
+  onDeleteStudentListItem = (index: number, id: any) => {
+    if (this.editSelectedData !== undefined && this.editSelectedData.enrollmentId === id) {
       this.checkDeleteValueAndEditValue = true;
-    }
-    this.studentDetailsList.splice(index, 1);
+    };
+    const setFilterValue = this.studentDetailsList.filter(object => {
+      return object.enrollmentId !== id;
+    });
+    this.studentDetailsList = setFilterValue
+    this.studentFilterDetailsList.next(this.studentDetailsList)
     this.totalStudent.next(this.studentDetailsList.length);
+    this.filterStudentListData();
   };
 
   // edit student Details 
@@ -121,6 +128,7 @@ export class StudentListService {
         return fields.name.indexOf('') && fields.selected === '' ? nameFound || emailFound || enrollmentIdFound || phoneNumberFound || gradeFound : (nameFound || emailFound || enrollmentIdFound || phoneNumberFound) && gradeFound
       })
     );
+
   };
 
 };

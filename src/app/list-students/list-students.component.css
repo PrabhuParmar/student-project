@@ -81,6 +81,44 @@
     top: 7px;
 }
 
+/* modal css  */
+
+.modal {
+    --bs-modal-footer-border-width: none !important;
+}
+
+.modal .modal-dialog .cancel-btn {
+    color: var(--primary-aqua);
+}
+
+.modal .modal-dialog .cancel-btn {
+    background-color: var(--primary-aqua);
+    border: 2px solid var(--primary-aqua);
+    color: var(--primary-white);
+    cursor: pointer;
+    font-weight: 600;
+    padding: 9px 25px;
+}
+
+.modal .modal-dialog .cancel-btn:hover {
+    background-color: var(--primary-white);
+    color: var(--primary-aqua);
+}
+
+.modal .modal-dialog .delete-btn {
+    background-color: var(--primary-white);
+    border: 2px solid var(--light-red);
+    color: var(--light-red);
+    cursor: pointer;
+    font-weight: 600;
+    padding: 9px 25px;
+}
+
+.modal .modal-dialog .delete-btn:hover {
+    background-color: var(--light-red);
+    color: var(--primary-white);
+}
+
 @media screen and (max-width:570px) {
     .student-list-section {
         padding: 5px;
@@ -92,39 +130,3 @@
 }
 
 /* student list End  */
-
-.cancel-btn {
-    color: var(--primary-aqua);
-}
-
-.cancel-btn {
-    background-color: var(--primary-aqua);
-    border: 2px solid var(--primary-aqua);
-    color: var(--primary-white);
-    cursor: pointer;
-    font-weight: 600;
-    padding: 9px 25px;
-}
-
-.cancel-btn:hover {
-    background-color: var(--primary-white);
-    color: var(--primary-aqua);
-}
-
-.delete-btn {
-    background-color: var(--light-red);
-    border: 2px solid var(--light-red);
-    color: var(--primary-white);
-    cursor: pointer;
-    font-weight: 600;
-    padding: 9px 25px;
-}
-
-.delete-btn:hover {
-    background-color: var(--primary-white);
-    color: var(--light-red);
-}
-
-.modal {
-    --bs-modal-footer-border-width: none !important;
-}

@@ -12,14 +12,16 @@ export class ListStudentsComponent {
   // Global Variables
   studentDataList: StudentDetailsInterface[] = [];
   idSortingStatus!: boolean;
-  sortingvalue = '../../assets/Image/arrows.png';
   phoneNumberSortingStatus!: boolean;
-  phoneNumberSortingIcon = '../../assets/Image/arrows.png';
   nameSortingStatus!: boolean;
-  nameSortingStatusIcon = '../../assets/Image/arrows.png';
   emailSortingStatus!: boolean;
-  emailSortingStatusIcon = '../../assets/Image/arrows.png';
   dateSortingStatus!: boolean;
+  setDeletestudentIndex!: number;
+  setDeleteStudentId: number | any;
+  sortingvalue = '../../assets/Image/arrows.png';
+  phoneNumberSortingIcon = '../../assets/Image/arrows.png';
+  nameSortingStatusIcon = '../../assets/Image/arrows.png';
+  emailSortingStatusIcon = '../../assets/Image/arrows.png';
   dateSortingIcon = '../../assets/Image/arrows.png';
 
   constructor(private studentListService: StudentListService, private router: Router) {
@@ -37,6 +39,8 @@ export class ListStudentsComponent {
     this.idSortingStatus == true ? this.studentDataList.sort((next: StudentDetailsInterface | any, prev: StudentDetailsInterface | any) =>
       (next.enrollmentId > prev.enrollmentId) ? 1 : -1) : this.studentDataList.sort((next: StudentDetailsInterface | any, prev: StudentDetailsInterface | any) =>
         (next.enrollmentId < prev.enrollmentId) ? 1 : -1);
+
+    this.studentListService.studentFilterDetailsList.next(this.studentDataList)
   };
 
   // Phone number
@@ -46,6 +50,7 @@ export class ListStudentsComponent {
     this.phoneNumberSortingStatus == true ? this.studentDataList.sort((next: StudentDetailsInterface, prev: StudentDetailsInterface) =>
       (next.phoneNumber > prev.phoneNumber) ? 1 : -1) : this.studentDataList.sort((next: StudentDetailsInterface, prev: StudentDetailsInterface) =>
         (next.phoneNumber < prev.phoneNumber) ? 1 : -1);
+    this.studentListService.studentFilterDetailsList.next(this.studentDataList)
   };
 
   // name Sorting 
@@ -55,6 +60,7 @@ export class ListStudentsComponent {
     this.nameSortingStatus ? this.studentDataList.sort((next, prev) =>
       (next.name.toUpperCase() > prev.name.toUpperCase()) ? 1 : -1) : this.studentDataList.sort((next: StudentDetailsInterface, prev: StudentDetailsInterface) =>
         (next.name.toUpperCase() < prev.name.toUpperCase()) ? 1 : -1);
+    this.studentListService.studentFilterDetailsList.next(this.studentDataList)
   };
 
   // email sorting 
@@ -64,6 +70,7 @@ export class ListStudentsComponent {
     this.emailSortingStatus ? this.studentDataList.sort((next, prev) =>
       (next.email > prev.email) ? 1 : -1) : this.studentDataList.sort((next: StudentDetailsInterface, prev: StudentDetailsInterface) =>
         (next.email < prev.email) ? 1 : -1);
+    this.studentListService.studentFilterDetailsList.next(this.studentDataList)
   };
 
   // date Sorting 
@@ -73,14 +80,16 @@ export class ListStudentsComponent {
     this.dateSortingStatus == true ? this.studentDataList.sort((next: StudentDetailsInterface, prev: StudentDetailsInterface) =>
       (next.dob > prev.dob) ? 1 : -1) : this.studentDataList.sort((next: StudentDetailsInterface, prev: StudentDetailsInterface) =>
         (next.dob < prev.dob) ? 1 : -1);
+    this.studentListService.studentFilterDetailsList.next(this.studentDataList)
   };
-  setDeletestudentIndex: number = 0;
-  setSelectedStudentDetailsIndex = (index: number) => {
+
+  setSelectedStudentDetailsIndex = (index: number, id: any) => {
     this.setDeletestudentIndex = index;
+    this.setDeleteStudentId = id;
   };
   // delete student Item 
   deleteStudentDetails = () => {
-    this.studentListService.onDeleteStudentListItem(this.setDeletestudentIndex);
+    this.studentListService.onDeleteStudentListItem(this.setDeletestudentIndex, this.setDeleteStudentId);
   };
 
   // edit student Details
@@ -92,6 +101,7 @@ export class ListStudentsComponent {
   // set search Data in service 
   setSearchData = (searchValue: any) => {
     this.studentListService.searchFilterData(searchValue.target.value);
+    // searchValue.target.value = ''
   };
 
   // set grade data in service 

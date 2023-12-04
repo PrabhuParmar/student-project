@@ -4,7 +4,7 @@
         <div class="d-flex flex-wrap justify-content-between ">
             <div class="col-12 col-sm-10 col-md-7 col-lg-5 my-2 d-flex position-relative search-section">
                 <input type="search" class="form-control" (keyup)="setSearchData($event)"
-                    placeholder="Search enrollmentId, Name, email, Phone Number">
+                    placeholder="Search By EnrollmentId, Name, Email, Phone Number">
                 <img src="../../assets/Image/icons8-search-50.png" alt="" class="search-image">
             </div>
             <div class="my-2">
@@ -130,7 +130,7 @@
                                 <div class="ms-3" data-bs-toggle="modal" data-bs-target="#setDeleteItem">
                                     <img src="../../assets/Image/icons8-delete-64.png"
                                         class="delete-image table-data-img" placement="top" ngbTooltip="Delete"
-                                        (click)="setSelectedStudentDetailsIndex(itemIndex)">
+                                        (click)="setSelectedStudentDetailsIndex(itemIndex,student.enrollmentId)">
                                 </div>
                             </div>
                         </td>
@@ -162,7 +162,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary cancel-btn" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary delete-btn" (click)="deleteStudentDetails()"
+                <button type="button" class="btn  delete-btn" (click)="deleteStudentDetails()"
                     data-bs-dismiss="modal">Confirm</button>
             </div>
         </div>
