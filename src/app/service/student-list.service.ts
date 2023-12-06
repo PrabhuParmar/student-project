@@ -7,10 +7,8 @@ import { Subject } from 'rxjs';
 })
 
 export class StudentListService {
-
   // Global Variable
-  studentGrade: string = '';
-  editMode: boolean = false;
+  setStudentGrade: string = '';
   indexNumber!: number;
   totalStudent = new Subject<number>();
   studentDetailsList: StudentDetailsInterface[] = [];
@@ -18,7 +16,6 @@ export class StudentListService {
   studentFilterDetailsList = new Subject<any>();
   searchData: string = "";
   gradeData: string = "";
-  checkDeleteValueAndEditValue!: boolean;
 
   // submit Data 
   submitStudentData = (studentData: StudentDetailsInterface) => {
@@ -29,10 +26,10 @@ export class StudentListService {
     this.studentDetailsList.push({
       ...studentData,
       enrollmentId: randomNumber,
-      grade: this.studentGrade,
+      grade: this.setStudentGrade,
       noOfSububject: studentData.subject.length
-
     });
+    this.studentFilterDetailsList.next(this.studentDetailsList);
     this.totalStudent.next(this.studentDetailsList.length);
   };
 
@@ -46,37 +43,32 @@ export class StudentListService {
 
     let allSubjectAverageTotal: number = sum / selectedsubject;
 
-    if (allSubjectAverageTotal >= 80) {
-      this.studentGrade = 'A';
-    }
-    else if (allSubjectAverageTotal >= 70) {
-      this.studentGrade = 'B';
-    }
-    else if (allSubjectAverageTotal >= 60) {
-      this.studentGrade = 'C';
-    }
-    else if (allSubjectAverageTotal >= 50) {
-      this.studentGrade = 'D';
-    }
-    else if (allSubjectAverageTotal >= 33) {
-      this.studentGrade = 'E';
-    }
-    else {
-      this.studentGrade = 'F';
+    switch (true) {
+      case allSubjectAverageTotal >= 80:
+        this.setStudentGrade = 'A';
+        break;
+      case allSubjectAverageTotal >= 70:
+        this.setStudentGrade = 'B';
+        break;
+      case allSubjectAverageTotal >= 60:
+        this.setStudentGrade = 'C';
+        break;
+      case allSubjectAverageTotal >= 50:
+        this.setStudentGrade = 'D';
+        break;
+      case allSubjectAverageTotal >= 33:
+        this.setStudentGrade = 'E';
+        break;
+      default:
+        this.setStudentGrade = 'F';
     };
   };
 
   // delete student details 
-  onDeleteStudentListItem = (index: number, id: any) => {
+  onDeleteStudentListItem = (id: any) => {
     let setDeleteItemIndex = this.studentDetailsList.findIndex(object => {
       return object.enrollmentId === id;
     });
-
-
-    if (this.editSelectedData !== undefined && this.editSelectedData.enrollmentId === this.studentDetailsList[setDeleteItemIndex].enrollmentId) {
-      this.checkDeleteValueAndEditValue = true;
-    };
-
     this.studentDetailsList.splice(setDeleteItemIndex, 1);
     this.studentFilterDetailsList.next(this.studentDetailsList);
     this.totalStudent.next(this.studentDetailsList.length);
@@ -84,9 +76,7 @@ export class StudentListService {
   };
 
   // edit student Details 
-  onEditStudentDetails = (index: number, id: number) => {
-    this.checkDeleteValueAndEditValue = false;
-    this.editMode = true;
+  onEditStudentDetails = (id: number) => {
     this.indexNumber = this.studentDetailsList.findIndex(object => {
       return object.enrollmentId === id;
     });
@@ -100,7 +90,7 @@ export class StudentListService {
     let setnewData = {
       ...studentData,
       enrollmentId: this.studentDetailsList[this.indexNumber].enrollmentId,
-      grade: this.studentGrade,
+      grade: this.setStudentGrade,
       noOfSububject: studentData.subject.length,
     };
     this.studentDetailsList[this.indexNumber] = setnewData;
@@ -108,15 +98,17 @@ export class StudentListService {
 
   // set search value 
   searchFilterData = (searchText: string) => {
-    this.searchData = searchText;
+    this.searchData = searchText
     this.filterStudentListData();
-  };
 
+  };
   // set grade Data Value 
   gradeFilterStudentdetails = (gradeText: string) => {
     this.gradeData = gradeText;
     this.filterStudentListData();
   };
+
+
 
   // filter student List data 
   filterStudentListData = () => {
@@ -124,18 +116,20 @@ export class StudentListService {
       name: this.searchData,
       selected: this.gradeData
     };
-
-    this.studentFilterDetailsList.next(
-      this.studentDetailsList.filter((data: any) => {
-        let nameFound = data.name.toString().trim().toLowerCase().search(fields.name.toLowerCase()) !== -1;
-        let emailFound = data.email.toString().trim().search(fields.name) !== -1;
-        let enrollmentIdFound = data.enrollmentId.toString().trim().search(fields.name) !== -1;
-        let phoneNumberFound = data.phoneNumber.toString().trim().search(fields.name) !== -1;
-        let gradeFound = data.grade.search(fields.selected) !== -1;
-        return fields.name.indexOf('') && fields.selected === '' ? nameFound || emailFound || enrollmentIdFound || phoneNumberFound || gradeFound : (nameFound || emailFound || enrollmentIdFound || phoneNumberFound) && gradeFound
-      })
-    );
-
+    let selectedData = this.studentDetailsList.filter((data: any) => {
+      let nameFound = data.name.toString().trim().toLowerCase().search(fields.name.toLowerCase()) !== -1;
+      let emailFound = data.email.toString().trim().search(fields.name) !== -1;
+      let enrollmentIdFound = data.enrollmentId.toString().trim().search(fields.name) !== -1;
+      let phoneNumberFound = data.phoneNumber.toString().trim().search(fields.name) !== -1;
+      let gradeFound = data.grade.search(fields.selected) !== -1;
+      return fields.name.indexOf('') && fields.selected === '' ? nameFound || emailFound || enrollmentIdFound || phoneNumberFound || gradeFound : (nameFound || emailFound || enrollmentIdFound || phoneNumberFound) && gradeFound
+    })
+    this.studentFilterDetailsList.next(selectedData);
   };
+  // reset search input and selected grade 
+  resetFilterFields = () => {
+    this.searchData = '';
+    this.gradeData = '';
+  }
 
 };

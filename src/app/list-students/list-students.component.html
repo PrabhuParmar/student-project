@@ -3,7 +3,7 @@
     <div class="student-table-section">
         <div class="d-flex flex-wrap justify-content-between ">
             <div class="col-12 col-sm-10 col-md-7 col-lg-5 my-2 d-flex position-relative search-section">
-                <input type="search" class="form-control" (keyup)="setSearchData($event)"
+                <input type="text" class="form-control search-input" (keyup)="setSearchData($event)"
                     placeholder="Search By EnrollmentId, Name, Email, Phone Number">
                 <img src="../../assets/Image/icons8-search-50.png" alt="" class="search-image">
             </div>
@@ -27,35 +27,37 @@
                         <th scope="col" class="col-id col-data student-details-lable col-table-title">
                             <span class="d-flex align-items-center">
                                 Enrollment Id
-                                <img src="{{sortingvalue}}" alt="" class="sorting-icon" (click)="sortingId()">
+                                <img src="{{ selectedSortingKeyName ==  'enrollmentId'  ? sortingImageIconSrc :'../../assets/Image/arrows.png' }}"
+                                    alt="" class="sorting-icon" (click)="setSortingStatus('enrollmentId')">
                             </span>
                         </th>
                         <th scope="col" class="col-name col-data student-details-lable col-table-title">
                             <span class="d-flex align-items-center">
                                 Name
-                                <img src="{{nameSortingStatusIcon}}" alt="" class="sorting-icon"
-                                    (click)="sortingName()">
+                                <img src="{{ selectedSortingKeyName ==  'name'  ? sortingImageIconSrc :'../../assets/Image/arrows.png' }}"
+                                    alt="" class="sorting-icon" (click)="setSortingStatus('name')">
                             </span>
                         </th>
                         <th scope="col" class="col-email student-details-lable col-table-title">
                             <span class="d-flex align-items-center">
                                 Email
-                                <img src="{{emailSortingStatusIcon}}" alt="" class="sorting-icon"
-                                    (click)="sortingEmail()">
+                                <img src="{{ selectedSortingKeyName ==  'email'  ? sortingImageIconSrc :'../../assets/Image/arrows.png' }}"
+                                    alt="" class="sorting-icon" (click)="setSortingStatus('email')">
                             </span>
                         </th>
                         <th scope="col" class="col-number col-data student-details-lable col-table-title">
                             <span class="d-flex align-items-center">
                                 Phone number
-                                <img src="{{phoneNumberSortingIcon}}" alt="" class="sorting-icon"
-                                    (click)="sortingPhoneNumber()">
+                                <img src="{{ selectedSortingKeyName ==  'phoneNumber'  ? sortingImageIconSrc :'../../assets/Image/arrows.png' }}"
+                                    alt="" class="sorting-icon" (click)="setSortingStatus('phoneNumber')">
                             </span>
                         </th>
                         <th scope="col" class="col-dob col-data student-details-lable col-table-title">
                             <div class="d-flex justify-content-center">
                                 <span>
                                     DOB
-                                    <img src="{{dateSortingIcon}}" alt="" class="sorting-icon" (click)="sortingDate()">
+                                    <img src="{{ selectedSortingKeyName ==  'dob'  ? sortingImageIconSrc :'../../assets/Image/arrows.png' }}"
+                                        alt="" class="sorting-icon" (click)="setSortingStatus('dob')">
                                 </span>
                             </div>
                         </th>
@@ -89,7 +91,8 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody *ngFor="let student of studentDataList let itemIndex=index">
+                <tbody
+                    *ngFor="let student of studentDataList | filter:sortingStatus:this.selectedSortingKeyName let itemIndex=index ">
                     <tr>
                         <td class="col-data"> {{student.enrollmentId}} </td>
                         <td class="col-data"> {{student.name}} </td>
@@ -125,13 +128,15 @@
                         </td>
                         <td class="col-action ">
                             <div class="d-flex justify-content-center mx-2">
-                                <img src="../../assets/Image/icons8-edit-48.png" class="edit-image table-data-img"
-                                    placement="top" ngbTooltip="Edit"
-                                    (click)="editStudentDetails(itemIndex,student.enrollmentId)">
+                                <div>
+                                    <img src="../../assets/Image/icons8-edit-48.png" class="edit-image table-data-img"
+                                        placement="top" ngbTooltip="Edit"
+                                        (click)="editStudentDetails(student.enrollmentId)">
+                                </div>
                                 <div class="ms-3" data-bs-toggle="modal" data-bs-target="#setDeleteItem">
                                     <img src="../../assets/Image/icons8-delete-64.png"
                                         class="delete-image table-data-img" placement="top" ngbTooltip="Delete"
-                                        (click)="setSelectedStudentDetailsIndex(itemIndex,student.enrollmentId)">
+                                        (click)="setSelectedStudentDetailsIndex(student.enrollmentId)">
                                 </div>
                             </div>
                         </td>

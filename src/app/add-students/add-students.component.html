@@ -4,7 +4,7 @@
         <div class="row d-flex justify-content-center form-container">
             <div class=" col col-12 col-sm-12 col-md-10 col-lg-11  student-form-section ">
                 <div class="d-flex justify-content-center form-title mb-4">
-                    <h1 class="form-title-data"> {{setFormMode ? 'Update Student' : 'Add Student'}}</h1>
+                    <h1 class="form-title-data"> {{setSubmitBtnMode ? 'Update Student' : 'Add Student'}}</h1>
                 </div>
                 <form [formGroup]="studentFormDetails" class="student-form row g-3">
                     <div class="mb-2 form-item-section col-lg-6">
@@ -184,8 +184,7 @@
                         <div class="d-flex justify-content-center">
                             <button type="button" class="btn submit-button set-disable-btn"
                                 (click)="onSubmitstudentFormDetails()" [disabled]="!studentFormDetails.valid">
-                                {{setFormMode ? 'Update' : 'Submit'}} </button>
-
+                                {{setSubmitBtnMode ? 'Update' : 'Submit'}} </button>
                         </div>
                         <div class="d-flex justify-content-center ms-3">
                             <button type="button" class="btn cancel-button"

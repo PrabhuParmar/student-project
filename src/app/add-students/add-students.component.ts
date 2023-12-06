@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { StudentListService } from '../service/student-list.service';
 import { Router } from '@angular/router';
@@ -8,22 +8,28 @@ import { Router } from '@angular/router';
   templateUrl: './add-students.component.html',
   styleUrls: ['./add-students.component.css']
 })
-export class AddStudentsComponent {
-  setFormMode!: boolean;
+export class AddStudentsComponent implements OnInit, OnDestroy {
+  setSubmitBtnMode!: boolean;
   subjectMarksData: any = new FormArray([]);
 
   constructor(private studentListService: StudentListService, private router: Router) {
     this.addControl(1);
-    this.setFormMode = studentListService.editMode;
-    if (studentListService.editMode == true) {
-      this.setSubjectDetails(studentListService.editSelectedData.subject.length)
+  };
+
+  ngOnInit(): void {
+    if (this.studentListService.editSelectedData == undefined || this.studentListService.editSelectedData.name == null) {
+      this.setSubmitBtnMode = false
+    } else {
+      this.setSubmitBtnMode = true;
+      this.setSubjectDetails(this.studentListService.editSelectedData.subject.length)
       this.studentFormDetails.patchValue({
-        ...studentListService.editSelectedData
+        ...this.studentListService.editSelectedData
       })
     };
-    if (studentListService.checkDeleteValueAndEditValue == true) {
-      this.onCancelStudentFormDetails();
-    };
+  };
+  ngOnDestroy(): void {
+    this.onCancelStudentFormDetails();
+    this.studentListService.editSelectedData = this.studentFormDetails.value
   };
 
 
@@ -31,7 +37,6 @@ export class AddStudentsComponent {
   trimValidation = (control: AbstractControl) => {
     return control.value !== null && control.value.trim() == '' ? { checkNameValue: true } : null;
   };
-
 
   // date validation 
   setDOBValidation = (control: AbstractControl) => {
@@ -61,7 +66,7 @@ export class AddStudentsComponent {
 
   // submit student Details 
   onSubmitstudentFormDetails = () => {
-    if (this.setFormMode == true) {
+    if (this.setSubmitBtnMode == true) {
       this.router.navigate(['/student-list'])
       this.studentListService.updateOnStudentDetails(this.studentFormDetails.value)
     }
@@ -80,8 +85,7 @@ export class AddStudentsComponent {
       noOfSububject: 1
     });
     this.setSubjectDetails(this.studentFormDetails.value.noOfSububject);
-    this.setFormMode = false;
-    this.studentListService.editMode = this.setFormMode
+    this.setSubmitBtnMode = false;
   };
 
   get subjectMark(): FormArray {
@@ -119,3 +123,5 @@ export class AddStudentsComponent {
     this.subjectMark.removeAt(index);
   };
 };
+
+

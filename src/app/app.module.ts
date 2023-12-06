@@ -10,6 +10,7 @@ import { NotFoundPageComponent } from './not-found-page/not-found-page.component
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StudentListService } from './service/student-list.service';
+import { FilterPipe } from './pipe/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { StudentListService } from './service/student-list.service';
     AddStudentsComponent,
     ListStudentsComponent,
     NotFoundPageComponent,
+    FilterPipe,
 
   ],
   imports: [

@@ -92,31 +92,43 @@
 }
 
 .modal .modal-dialog .cancel-btn {
-    background-color: var(--primary-aqua);
+    background-color: var(--primary-white);
+    color: var(--primary-aqua);
     border: 2px solid var(--primary-aqua);
-    color: var(--primary-white);
     cursor: pointer;
     font-weight: 600;
     padding: 9px 25px;
 }
 
 .modal .modal-dialog .cancel-btn:hover {
-    background-color: var(--primary-white);
-    color: var(--primary-aqua);
+    background-color: var(--primary-aqua);
+    color: var(--primary-white);
 }
 
 .modal .modal-dialog .delete-btn {
-    background-color: var(--primary-white);
+    background-color: var(--light-red);
+    color: var(--primary-white);
     border: 2px solid var(--light-red);
-    color: var(--light-red);
     cursor: pointer;
     font-weight: 600;
     padding: 9px 25px;
 }
 
 .modal .modal-dialog .delete-btn:hover {
-    background-color: var(--light-red);
-    color: var(--primary-white);
+    background-color: var(--primary-white);
+    color: var(--light-red);
+}
+
+@media screen and (max-width:360px) {
+    .search-input::placeholder {
+        font-size: 8px;
+    }
+}
+
+@media screen and (min-width:361px) and (max-width:480px) {
+    .search-input::placeholder {
+        font-size: 10px;
+    }
 }
 
 @media screen and (max-width:570px) {
@@ -126,6 +138,14 @@
 
     .student-list-section .empty-message-section {
         height: calc(100vh - 250px);
+    }
+
+}
+
+
+@media screen and (min-width:481px) and (max-width:1024px) {
+    .search-input::placeholder {
+        font-size: 12px;
     }
 }
 
